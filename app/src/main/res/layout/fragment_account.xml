@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.jhomasinas.mshopping.AccountFragment">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardAccount"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:cardCornerRadius="2dip"
+        app:cardElevation="2dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnLoginLayout"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="12dp"
+                android:layout_marginStart="25dp"
+                android:backgroundTint="@android:color/holo_blue_bright"
+                android:elevation="@dimen/cardview_default_elevation"
+                android:fontFamily="@font/happy_monkey"
+                android:text="Log In"
+                android:textAllCaps="false"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnSignLayout"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/btnLoginLayout"
+                android:layout_alignBottom="@+id/btnLoginLayout"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="@android:color/holo_blue_bright"
+                android:elevation="@dimen/cardview_default_elevation"
+                android:fontFamily="@font/happy_monkey"
+                android:text="Sign Up"
+                android:textAllCaps="false"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/txtSample"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAMPLE"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+
+
+</LinearLayout>

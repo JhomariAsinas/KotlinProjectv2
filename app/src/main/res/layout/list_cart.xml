@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/cartImage"
+            android:layout_width="130dp"
+            android:layout_height="150dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/cartName"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/cartImage"
+            android:layout_marginEnd="21dp"
+            android:fontFamily="@font/cantora_one"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            app:minTextSize="8sp"
+            app:sizeToFit="true"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:text="Spicy Chicken Burger "
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/cartItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/view2"
+            android:layout_below="@+id/cartName"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/cantora_one"
+            android:text="11 items"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/cartPrice"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/view2"
+            android:layout_alignStart="@+id/btnRemove"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="70dp"
+            android:fontFamily="@font/cantora_one"
+            android:text="$15000.00"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/cartItems"
+            android:layout_alignBottom="@+id/cartItems"
+            android:layout_marginEnd="6dp"
+            android:layout_toStartOf="@+id/cartItems"
+            android:fontFamily="@font/cantora_one"
+            android:text="No. of Ordered Items: "
+            android:textColor="@android:color/background_dark"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView6"
+            android:layout_alignTop="@+id/cartPrice"
+            android:fontFamily="@font/cantora_one"
+            android:text="Total Amount:"
+            android:textColor="@android:color/background_dark"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cartImage"
+            android:layout_marginTop="12dp"
+            android:background="@android:color/background_dark"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/view2" />
+
+        <Button
+            android:id="@+id/btnTransact"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view2"
+            android:layout_marginTop="7dp"
+            android:layout_toStartOf="@+id/textView8"
+            android:fontFamily="@font/cantora_one"
+            android:text="Checkout"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnRemove"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/btnTransact"
+            android:layout_alignBottom="@+id/btnTransact"
+            android:layout_alignEnd="@+id/cartName"
+            android:layout_marginEnd="11dp"
+            android:fontFamily="@font/cantora_one"
+            android:text="Remove"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+
+
+    </RelativeLayout>
+
+
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="1dp"
+    app:cardCornerRadius="2dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="1dp"
+    app:contentPadding="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/prodImg"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginLeft="3dip"
+            android:layout_marginRight="3dip"/>
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/prodName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/prodImg"
+            android:fontFamily="@font/cantora_one"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:text="Cheesy Burger"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:minTextSize="5sp"
+            app:sizeToFit="true" />
+
+        <TextView
+            android:id="@+id/prodPrice"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_alignStart="@+id/prodName"
+            android:layout_below="@+id/prodName"
+            android:fontFamily="@font/happy_monkey"
+            android:text="$15000.00"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="serif" />
+
+        <Button
+            android:id="@+id/btnView"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/prodPrice"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="11dp"
+            android:backgroundTint="@android:color/holo_blue_bright"
+            android:elevation="@dimen/cardview_compat_inset_shadow"
+            android:fontFamily="@font/happy_monkey"
+            android:text="View Product"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

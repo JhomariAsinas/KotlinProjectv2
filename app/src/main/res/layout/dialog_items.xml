@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="13dp"
+            android:layout_toStartOf="@+id/editTextItems"
+            android:src="@drawable/ic_info_black_24dp" />
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView3"
+            android:layout_toEndOf="@+id/imageView3"
+            android:fontFamily="@font/cantora_one"
+            android:maxLines="3"
+            android:layout_margin="5dp"
+            android:text="You must enter the no. of items you want to add into your account"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="6dp"
+            android:ems="10"
+            android:fontFamily="@font/cantora_one"
+            android:hint="No. of Items"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_red_light" />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>
