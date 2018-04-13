@@ -20,6 +20,7 @@ import com.example.jhomasinas.mshopping.Model.Cart
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
 
@@ -29,7 +30,7 @@ import org.jetbrains.anko.toast
  */
 class CartFragment : Fragment(),CartAdapter.Delegate {
     override fun onTransactCart(cart: Cart) {
-        transactCart(cart.product_code)
+        startActivityForResult(intentFor<PaymentActivity>(),50)
     }
 
     override fun onDeleteCart(cart: Cart) {

@@ -28,7 +28,10 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".ProductDetail" />
-        <activity android:name=".PaymentActivity"></activity>
+        <activity
+            android:name=".PaymentActivity"
+            android:label="@string/title_activity_payment"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
