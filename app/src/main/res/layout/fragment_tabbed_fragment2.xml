@@ -1,0 +1,221 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jhomasinas.mshopping.TabbedFragment2">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/cantora_one"
+                        android:text="Payment Details"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="30sp"
+                        android:id="@+id/textView17" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/textView17"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:background="@android:color/background_dark"
+                        android:id="@+id/view4" />
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/view4"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/cantora_one"
+                        android:text="Choose the mode of payment you want in your items"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:cardElevation="2dip"
+        android:layout_margin="7dp"
+        app:cardCornerRadius="10dip"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView20"
+        android:layout_marginTop="12dp"
+        android:id="@+id/cardView">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioGroup
+                android:id="@+id/radGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="19dp"
+                android:checkedButton="@+id/radCash"
+                >
+
+                <RadioButton
+                    android:id="@+id/radCash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cantora_one"
+                    android:text="Cash on Delivery"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </RadioGroup>
+
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/radGroup"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/cantora_one"
+                android:paddingLeft="10dp"
+                android:paddingRight="3dp"
+                android:text="@string/COD"
+                android:textAlignment="viewStart"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView21"
+                android:layout_marginTop="19dp"
+                android:fontFamily="@font/cantora_one"
+                android:paddingLeft="10dp"
+                android:paddingRight="5dp"
+                android:text="@string/Days"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="match_parent"
+                android:layout_height="360dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/cardView"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="10dip"
+                app:cardElevation="2dip">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RadioButton
+                        android:id="@+id/radRemittance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginTop="19dp"
+                        android:fontFamily="@font/cantora_one"
+                        android:text="Remittance Center"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/radRemittance"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/cantora_one"
+                        android:text="You can pay your items through the following Remittance center"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:id="@+id/textView22" />
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/textView22"
+                        android:layout_marginStart="11dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@mipmap/ic_lbc" />
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_alignTop="@+id/imageView4"
+                        android:layout_centerHorizontal="true"
+                        android:src="@mipmap/ic_cebuana" />
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@+id/imageView5"
+                        android:layout_marginEnd="16dp"
+                        android:src="@mipmap/ic_palawan"
+                        android:id="@+id/imageView7" />
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignStart="@+id/radRemittance"
+                        android:layout_marginBottom="14dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@mipmap/ic_mlhuiller" />
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_alignEnd="@+id/imageView7"
+                        android:layout_alignTop="@+id/imageView6"
+                        android:src="@mipmap/ic_west"
+                        android:layout_marginEnd="13dp" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
