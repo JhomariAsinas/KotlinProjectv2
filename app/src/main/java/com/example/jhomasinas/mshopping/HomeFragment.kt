@@ -5,18 +5,24 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
 import com.example.jhomasinas.mshopping.Adapter.ProductAdapter
 import com.example.jhomasinas.mshopping.Config.ProductApi
 import com.example.jhomasinas.mshopping.Model.Product
+import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_product_detail.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import org.jetbrains.anko.support.v4.indeterminateProgressDialog
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
@@ -26,6 +32,10 @@ import org.jetbrains.anko.support.v4.toast
  * A simple [Fragment] subclass.
  */
 class HomeFragment : Fragment(),ProductAdapter.Delegate {
+    override fun onClickImage(product: Product) {
+        createImageDialog(product.product_image)
+    }
+
     override fun onClickProduct(product: Product) {
         val int : Intent = Intent(activity,ProductDetail::class.java)
         int.putExtra("Code"    ,product.product_code)
@@ -35,7 +45,7 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
         int.putExtra("Price"   ,product.product_price)
         int.putExtra("Descrip"   ,product.product_des)
         int.putExtra("Image"   ,product.product_image)
-        activity.startActivityForResult(int,50)
+        activity!!.startActivityForResult(int,50)
     }
 
 
@@ -55,12 +65,13 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
     }
 
     var disposable : Disposable? = null
+    var swipe : SwipeRefreshLayout? = null
     var progressDialog : ProgressDialog? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val root =  inflater!!.inflate(R.layout.fragment_home, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val root =  inflater !!.inflate(R.layout.fragment_home, container, false)
 
+        swipe = root.findViewById(R.id.mSwipeRefreshLayout)
         recyclerView1  = root.findViewById(R.id.recyclerView)as RecyclerView
 
         progressDialog = indeterminateProgressDialog("Fetching Product")
@@ -70,6 +81,11 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
         initRecyclerView()
 
         getProduct()
+
+        swipe?.setOnRefreshListener {
+            getProduct()
+            swipe?.isRefreshing = false
+        }
         return root
 
     }
@@ -100,6 +116,26 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
         val adapter = ProductAdapter(mArrayProduct,this)
         recyclerView1!!.adapter = adapter
         progressDialog?.dismiss()
+
+
+    }
+
+    fun createImageDialog(img: String){
+            val dialogView = LayoutInflater.from(activity).inflate(R.layout.dialog_image, null)
+            var imgView = dialogView.findViewById<ImageView>(R.id.imageDialog)
+
+            Picasso.get()
+                    .load("http://192.168.1.50/e-commerce/assets/image/"+img)
+                    .resize(350, 350)
+                    .centerCrop()
+                    .into(imgView)
+
+            val builder = AlertDialog.Builder(activity!!)
+                    .setView(dialogView)
+            val dialog = builder.show()
+
+            dialog.show()
+
     }
 
 }// Required empty public constructor

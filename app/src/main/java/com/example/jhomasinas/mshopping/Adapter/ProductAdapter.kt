@@ -20,6 +20,7 @@ class ProductAdapter(val prodList: ArrayList<Product>, val delegate: Delegate) :
 
     interface Delegate{
         fun onClickProduct(product:Product)
+        fun onClickImage(product:Product)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -45,6 +46,12 @@ class ProductAdapter(val prodList: ArrayList<Product>, val delegate: Delegate) :
         holder?.btnView?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
                 delegate.onClickProduct(prodList.get(position))
+            }
+        })
+
+        holder?.prodImg?.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(p0: View?) {
+                delegate.onClickImage(prodList.get(position))
             }
         })
 

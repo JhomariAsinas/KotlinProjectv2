@@ -1,12 +1,15 @@
 package com.example.jhomasinas.mshopping
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.widget.FrameLayout
+import com.example.jhomasinas.mshopping.Config.SharedPref
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
@@ -20,8 +23,12 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                fragment = CartFragment()
-                addFragment(fragment!!)
+                if(SharedPref.getmInstance(this).isLoggedIn){
+                    fragment = CartFragment()
+                    addFragment(fragment!!)
+                }else{
+                    startActivity(intentFor<LoginActivity>())
+                }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
@@ -36,8 +43,12 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == 50 && data != null){
-            fragment = CartFragment()
-            addFragment(fragment!!)
+            if(SharedPref.getmInstance(this).isLoggedIn){
+                fragment = CartFragment()
+                addFragment(fragment!!)
+            }else{
+                startActivity(intentFor<LoginActivity>())
+            }
         }
     }
 

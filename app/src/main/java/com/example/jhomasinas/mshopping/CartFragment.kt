@@ -44,8 +44,7 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
     var textAddress : TextView?  = null
     private var cartRecycler: RecyclerView? = null
     private var cartWarning:   TextView?     = null
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater!!.inflate(R.layout.fragment_cart, container, false)
         cartRecycler = root.findViewById(R.id.recyclerCard)
         cartWarning  = root.findViewById(R.id.cartWarning)
@@ -68,7 +67,8 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
     }
 
     fun getCart(){
-       disposable = productApiserve.getCart()
+        val user = SharedPref.getmInstance(activity!!).customerUser
+       disposable = productApiserve.getCart(user!!)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -89,10 +89,10 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
     }
 
     fun transactCart(code: String){
-        val name    = SharedPref.getmInstance(activity).customerName
-        val address = SharedPref.getmInstance(activity).customerAddress
-        val contact = SharedPref.getmInstance(activity).customerContact
-        val user = SharedPref.getmInstance(activity).customerUser
+        val name    = SharedPref.getmInstance(activity!!).customerName
+        val address = SharedPref.getmInstance(activity!!).customerAddress
+        val contact = SharedPref.getmInstance(activity!!).customerContact
+        val user = SharedPref.getmInstance(activity!!).customerUser
 
         disposable = productApiserve.transactProd(code,address!!,name!!,contact!!,user!!)
                 .subscribeOn(Schedulers.io())
@@ -112,12 +112,12 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
 
 
     fun updateProd(address: String){
-        val user = SharedPref.getmInstance(activity).customerUser
+        val user = SharedPref.getmInstance(activity!!).customerUser
         disposable = productApiserve.updateAddress(user!!,address)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        {result -> SharedPref.getmInstance(activity).changeAdd(address)
+                        {result -> SharedPref.getmInstance(activity!!).changeAdd(address)
                                    toast("Your address was successfully updated")
                         },
                         {error  -> toast("Error ${error.localizedMessage}") }
@@ -128,7 +128,7 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
         val dialogView = LayoutInflater.from(activity).inflate(R.layout.dialog_address, null)
         var edit = dialogView.findViewById<EditText>(R.id.editAddress)
 
-        val builder = AlertDialog.Builder(activity)
+        val builder = AlertDialog.Builder(activity!!)
                 .setView(dialogView)
                 .setPositiveButton("Change Address",null)
                 .setNegativeButton("Cancel",null)
@@ -149,7 +149,7 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
     }
 
     fun initAddress(){
-        textAddress?.text = SharedPref.getmInstance(activity).customerAddress
+        textAddress?.text = SharedPref.getmInstance(activity!!).customerAddress
     }
 
     override fun onPause() {

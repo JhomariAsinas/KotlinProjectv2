@@ -24,8 +24,9 @@ interface ProductApi{
     @GET("admin/showSelprod/All")
     abstract fun getProduct(): Observable<List<Product>>
 
-    @GET("admin/getCartdata")
-    abstract fun getCart(): Observable<List<Cart>>
+    @FormUrlEncoded
+    @POST("admin/getCartdata")
+    abstract fun getCart(@Field("user") user:String): Observable<List<Cart>>
 
     @FormUrlEncoded
     @POST("admin/signCustomer")

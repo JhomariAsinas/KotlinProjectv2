@@ -12,9 +12,10 @@ class SharedPref private constructor(context: Context) {
     val isLoggedIn: Boolean
         get() {
             val sharedPreferences = con.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
-            return if (sharedPreferences.getString(KEY_USERNAME, null) != null) { true
+            if (sharedPreferences.getString(KEY_USERNAME, null) != null) {
+                return true
             } else {
-                false
+               return false
             }
         }
 

@@ -9,16 +9,59 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardAccount"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="130dp"
         app:cardCornerRadius="2dip"
         app:cardElevation="2dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp">
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/chango"
+                android:text="MSHOPPING"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/btnLoginLayout"
+                android:layout_alignEnd="@+id/btnLoginLayout"
+                android:layout_marginBottom="7dp"
+                android:layout_marginEnd="39dp"
+                android:fontFamily="@font/cantora_one"
+                android:text="User: "
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView13"
+                android:layout_alignBottom="@+id/textView13"
+                android:layout_alignStart="@+id/btnChangeAccount"
+                android:layout_marginStart="6dp"
+                android:fontFamily="@font/cantora_one"
+                android:text="Jhomari B. Asinas"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/btnLoginLayout"
@@ -50,18 +93,23 @@
                 android:textAllCaps="false"
                 android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/btnChangeAccount"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/btnLoginLayout"
+                android:layout_alignBottom="@+id/btnLoginLayout"
+                android:layout_centerHorizontal="true"
+                android:backgroundTint="@android:color/holo_blue_bright"
+                android:fontFamily="@font/happy_monkey"
+                android:text="Change Account"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
-
-    <TextView
-        android:id="@+id/txtSample"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SAMPLE"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"/>
 
 
 </LinearLayout>
