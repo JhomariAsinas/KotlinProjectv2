@@ -48,6 +48,6 @@ class LoginActivity : AppCompatActivity() {
                 user.get(0).customer_contact
         )
         toast("Your account was login successfully")
-
+        startActivity(intentFor<MainActivity>())
     }
 }

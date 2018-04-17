@@ -4,11 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
 import com.example.jhomasinas.mshopping.Config.ProductApi
 import com.example.jhomasinas.mshopping.Config.SharedPref
@@ -33,12 +35,13 @@ class ProductDetail : AppCompatActivity() {
     var code:    String? = null
     var prodimg: String? = null
     var items1:  String?    = null
-
+    var view: View?  = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
 
         val toolbar = findViewById<Toolbar>(R.id.prodToolbar)
+        view = findViewById(R.id.viewSnack)
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Product Detail"
 
@@ -76,7 +79,7 @@ class ProductDetail : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        {result -> toast("Add Cart Successfully")},
+                        {result -> return@subscribe},
                         {error -> toast("Error ${error.localizedMessage}")}
                 )
     }
@@ -103,9 +106,14 @@ class ProductDetail : AppCompatActivity() {
                 toast("Insufficient Items for your Order")
             }else{
                 addtoCart(items2)
+                dialog.dismiss()
+                Snackbar.make(view!!, "Added to Cart Successfully", Snackbar.LENGTH_LONG)
+                        .setAction("Go to Cart", { setResult(Activity.RESULT_OK, intent.putExtra("asdss", "asds"))
+                            finish()}).show()
             }
         }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu,menu)

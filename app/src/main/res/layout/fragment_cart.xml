@@ -81,6 +81,13 @@ Addresss"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <ProgressBar
+                android:id="@+id/progressCart"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
             <TextView
                 android:id="@+id/cartWarning"
                 android:layout_width="wrap_content"
@@ -90,6 +97,7 @@ Addresss"
                 android:fontFamily="@font/happy_monkey"
                 android:text="There are no available items in Cart"
                 android:textAlignment="center"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -112,6 +120,12 @@ Addresss"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
+            <ProgressBar
+                android:id="@+id/progressApproved"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <TextView
                 android:id="@+id/processWarning"
                 android:layout_width="wrap_content"
@@ -121,6 +135,7 @@ Addresss"
                 android:fontFamily="@font/happy_monkey"
                 android:text="There are no available items in Cart"
                 android:textAlignment="center"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 android:textSize="18sp"
                 android:textStyle="bold" />

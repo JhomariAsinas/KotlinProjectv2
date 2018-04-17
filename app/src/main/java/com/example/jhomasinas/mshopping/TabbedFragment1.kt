@@ -35,4 +35,6 @@ class TabbedFragment1 : Fragment() {
         editAddress?.setText(SharedPref.getmInstance(activity!!).customerAddress)
     }
 
+
+
 }// Required empty public constructor

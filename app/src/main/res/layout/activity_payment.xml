@@ -13,17 +13,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/appbar_padding_top"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="@color/cardview_light_background">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="34dp"
             android:layout_weight="1"
-            android:background="?attr/colorPrimary"
+            android:background="@color/cardview_light_background"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="Payment Details"
+            app:titleTextColor="@color/colorPrimaryDark"
             app:titleTextAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
 
         </android.support.v7.widget.Toolbar>
@@ -31,19 +33,22 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_light_background"
+            app:tabIndicatorColor="@color/colorPrimaryDark"
+            app:tabSelectedTextColor="@color/colorPrimaryDark">
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Customer Information" />
+                android:icon="@drawable/ic_curriculum_vitae" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Payment Details"/>
+                android:icon="@drawable/ic_confirm" />
 
 
         </android.support.design.widget.TabLayout>

@@ -20,6 +20,7 @@ import com.example.jhomasinas.mshopping.Model.Cart
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_cart.*
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
@@ -30,13 +31,14 @@ import org.jetbrains.anko.toast
  */
 class CartFragment : Fragment(),CartAdapter.Delegate {
     override fun onTransactCart(cart: Cart) {
-        val int : Intent = Intent(activity,PaymentActivity::class.java)
+        val int = Intent(activity,PaymentActivity::class.java)
         SharedPref.getmInstance(activity!!).addProd(cart.product_code)
         activity!!.startActivityForResult(int,60)
     }
 
     override fun onDeleteCart(cart: Cart) {
         deleteCart(cart.product_code)
+        getCart()
     }
 
     val productApiserve by lazy {
@@ -117,7 +119,7 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
                 .subscribe(
                         {result -> toast("Items deleted in your Cart")
                                    getCart()},
-                        {error  -> toast("Error ${error.localizedMessage}") }
+                        {error  -> toast("Error $ {error.localizedMessage}") }
                 )
     }
 
@@ -128,6 +130,7 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
         if(mCartList != null){
             cartRecycler?.adapter   = adapter
             cartWarning?.visibility = View.GONE
+            progressCart.visibility = View.GONE
         }
 
     }
@@ -136,8 +139,9 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
         val mApprovedList: ArrayList<Approved> = ArrayList(approvedList)
         val adapter = ProcessAdapter(mApprovedList)
         if(mApprovedList != null){
-            approvedRecycler?.adapter  = adapter
-            processWarning?.visibility = View.GONE
+            approvedRecycler?.adapter   = adapter
+            processWarning?.visibility  = View.GONE
+            progressApproved.visibility = View.GONE
         }
 
     }

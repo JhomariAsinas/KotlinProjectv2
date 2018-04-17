@@ -67,7 +67,7 @@ class AccountFragment : Fragment() {
 
     fun logout(){
         SharedPref.getmInstance(activity!!).logout()
-        intentFor<MainActivity>()
+        startActivity(intentFor<MainActivity>())
     }
 
 }
