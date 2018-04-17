@@ -1,5 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="3dip"
+    android:elevation="2dip"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="120dp"
+            android:layout_height="130dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="14dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/approvedName"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/imageView8"
+            android:layout_marginEnd="21dp"
+            android:fontFamily="@font/cantora_one"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:text="Product Sample Name"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:minTextSize="8sp"
+            app:sizeToFit="true" />
+
+
+        <ImageView
+            android:id="@+id/imgCash"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/approvedName"
+            android:layout_below="@+id/approvedName"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_delivery_truck" />
+
+        <ImageView
+            android:id="@+id/imgRemit"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/approvedName"
+            android:layout_below="@+id/approvedName"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_money" />
+
+        <TextView
+            android:id="@+id/txtCash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imgCash"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@+id/imgCash"
+            android:fontFamily="@font/cantora_one"
+            android:text="Cash On Delivery"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtRemit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imgCash"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@+id/imgCash"
+            android:fontFamily="@font/cantora_one"
+            android:text="Remmittance Cash"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtAmount"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView8"
+            android:layout_alignEnd="@+id/txtCash"
+            android:fontFamily="@font/cantora_one"
+            android:text="$ 1000.00"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/imageView8"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="15dp"
+            android:background="@android:color/black" />
+
+
+
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

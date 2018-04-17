@@ -1,5 +1,6 @@
 package com.example.jhomasinas.mshopping.Config
 
+import com.example.jhomasinas.mshopping.Model.Approved
 import com.example.jhomasinas.mshopping.Model.Cart
 import com.example.jhomasinas.mshopping.Model.Customer
 import com.example.jhomasinas.mshopping.Model.Product
@@ -50,7 +51,8 @@ interface ProductApi{
 
     @FormUrlEncoded
     @POST("admin/deleteCartData")
-    abstract fun deleteCart(@Field("code") code :String): Observable<ProductResponse>
+    abstract fun deleteCart(@Field("code") code : String,
+                            @Field("user") user : String ): Observable<ProductResponse>
 
     @FormUrlEncoded
     @POST("admin/transactProd")
@@ -58,12 +60,18 @@ interface ProductApi{
                               @Field("address") address : String,
                               @Field("name")    name    : String,
                               @Field("contact") contact : String,
-                              @Field("user")    user    : String): Observable<ProductResponse>
+                              @Field("user")    user    : String,
+                              @Field("payment") payment : String): Observable<ProductResponse>
 
     @FormUrlEncoded
     @POST("admin/updateAddress")
     abstract fun updateAddress(@Field("user")    user    : String,
                                @Field("address") address : String ): Observable<ProductResponse>
+
+
+    @FormUrlEncoded
+    @POST("admin/getApprovedProd")
+    abstract fun getTransact(@Field("user") user : String): Observable<List<Approved>>
 
     companion object {
         val BASE_URL = "http://192.168.1.50/mobilecom/"

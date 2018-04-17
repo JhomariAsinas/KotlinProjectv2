@@ -49,6 +49,9 @@ class MainActivity : AppCompatActivity() {
             }else{
                 startActivity(intentFor<LoginActivity>())
             }
+        }else if(requestCode == 60 && data!= null){
+            fragment = CartFragment()
+            addFragment(fragment!!)
         }
     }
 

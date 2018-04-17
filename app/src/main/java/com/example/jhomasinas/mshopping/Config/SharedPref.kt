@@ -44,6 +44,12 @@ class SharedPref private constructor(context: Context) {
             return sharedPreferences.getString(KEY_CONTACT, null)
         }
 
+    val codeProd: String?
+        get() {
+            val sharedPreferences = con.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getString(KEY_CODE, null)
+        }
+
     init {
         con = context
     }
@@ -75,6 +81,18 @@ class SharedPref private constructor(context: Context) {
         return true
     }
 
+    fun addProd(code: String): Boolean {
+
+        val sharedPreferences = con.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val edit = sharedPreferences.edit()
+
+        edit.putString(KEY_CODE, code)
+
+        edit.apply()
+
+        return true
+    }
+
 
 
     fun logout(): Boolean {
@@ -94,6 +112,7 @@ class SharedPref private constructor(context: Context) {
         private val KEY_FULLNAME = "fname"
         private val KEY_ADDRESS = "address"
         private val KEY_CONTACT = "srcode"
+        private val KEY_CODE = "code"
 
         @Synchronized
         fun getmInstance(context: Context): SharedPref {

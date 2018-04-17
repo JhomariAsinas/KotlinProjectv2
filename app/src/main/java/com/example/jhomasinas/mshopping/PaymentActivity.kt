@@ -1,49 +1,56 @@
 package com.example.jhomasinas.mshopping
 
+import android.app.Activity
 import android.support.design.widget.TabLayout
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Button
+import com.example.jhomasinas.mshopping.Config.ProductApi
+import com.example.jhomasinas.mshopping.Config.ProductResponse
+import com.example.jhomasinas.mshopping.Config.SharedPref
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 import kotlinx.android.synthetic.main.activity_payment.*
-import kotlinx.android.synthetic.main.fragment_payment.view.*
+import org.jetbrains.anko.toast
 
 class PaymentActivity : AppCompatActivity() {
 
-    /**
-     * The [android.support.v4.view.PagerAdapter] that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * [android.support.v4.app.FragmentStatePagerAdapter].
-     */
+
+    val productApiserve by lazy {
+        ProductApi.create()
+    }
+
+    var disposable : Disposable? = null
+
+
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
+
+    private var code : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
 
         setSupportActionBar(toolbar)
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
+
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
-        // Set up the ViewPager with the sections adapter.
         container.adapter = mSectionsPagerAdapter
 
         container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
+
+
+
 
 
     }
@@ -56,9 +63,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         val id = item.itemId
 
         if (id == R.id.action_settings) {
@@ -89,35 +94,43 @@ class PaymentActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    class PlaceholderFragment : Fragment() {
-
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                                  savedInstanceState: Bundle?): View? {
-            val rootView = inflater.inflate(R.layout.fragment_payment, container, false)
-            return rootView
-        }
-
-        companion object {
-            /**
-             * The fragment argument representing the section number for this
-             * fragment.
-             */
-            private val ARG_SECTION_NUMBER = "section_number"
-
-            /**
-             * Returns a new instance of this fragment for the given section
-             * number.
-             */
-            fun newInstance(sectionNumber: Int): PlaceholderFragment {
-                val fragment = PlaceholderFragment()
-                val args = Bundle()
-                args.putInt(ARG_SECTION_NUMBER, sectionNumber)
-                fragment.arguments = args
-                return fragment
+     fun choose(view: View) {
+        val answers = view as Button
+        when(answers.id){
+            R.id.btnCash -> {
+                Transaction("Cash on Delivery")
+            }
+            R.id.btnRemmit -> {
+                Transaction("Remmitance")
             }
         }
+
     }
+
+    fun Transaction(payment:String){
+        disposable = productApiserve.transactProd(
+                SharedPref.getmInstance(this).codeProd!!,
+                SharedPref.getmInstance(this).customerAddress!!,
+                SharedPref.getmInstance(this).customerName!!,
+                SharedPref.getmInstance(this).customerContact!!,
+                SharedPref.getmInstance(this).customerUser!!,
+                payment)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {result -> handleResponse(result)},
+                        {error  -> toast("Error ${error.localizedMessage}") }
+                )
+    }
+
+    fun handleResponse(response: ProductResponse){
+        if(response.response!!){
+            toast("Successfully Cashout")
+            setResult(Activity.RESULT_OK, intent.putExtra("asdss", "asds"))
+            finish()
+        }else{
+            toast("Transaction was Failed")
+        }
+    }
+
 }

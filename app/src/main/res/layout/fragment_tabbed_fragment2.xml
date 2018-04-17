@@ -10,7 +10,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="600dp"
             xmlns:app="http://schemas.android.com/apk/res-auto">
                     <TextView
                         android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         app:cardElevation="2dip"
         android:layout_margin="7dp"
         app:cardCornerRadius="10dip"
@@ -63,59 +63,50 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RadioGroup
-                android:id="@+id/radGroup"
+            <TextView
+                android:id="@+id/radCash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="22dp"
-                android:layout_marginTop="19dp"
-                android:checkedButton="@+id/radCash"
-                >
-
-                <RadioButton
-                    android:id="@+id/radCash"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/cantora_one"
-                    android:text="Cash on Delivery"
-                    android:textColor="@android:color/holo_red_light"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-            </RadioGroup>
-
-
-            <TextView
-                android:id="@+id/textView21"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/radGroup"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="11dp"
                 android:fontFamily="@font/cantora_one"
-                android:paddingLeft="10dp"
-                android:paddingRight="3dp"
-                android:text="@string/COD"
-                android:textAlignment="viewStart"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:text="Cash on Delivery"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView21"
-                android:layout_marginTop="19dp"
+                android:layout_below="@+id/radCash"
+                android:layout_marginTop="22dp"
                 android:fontFamily="@font/cantora_one"
                 android:paddingLeft="10dp"
                 android:paddingRight="5dp"
                 android:text="@string/Days"
                 android:textAlignment="center"
-                android:textColor="@android:color/holo_red_light"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:id="@+id/textView21" />
+
+            <Button
+                android:id="@+id/btnCash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView21"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="11dp"
+                android:backgroundTint="@color/com_facebook_button_background_color_pressed"
+                android:fontFamily="@font/cantora_one"
+                android:onClick="choose"
+                android:text="Transact your Order"
+                android:textAllCaps="false"
+                android:textColor="@color/cardview_light_background" />
         </RelativeLayout>
 
 
@@ -124,7 +115,7 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView2"
                 android:layout_width="match_parent"
-                android:layout_height="360dp"
+                android:layout_height="420dp"
                 android:layout_marginRight="7dp"
                 android:layout_marginLeft="7dp"
                 android:layout_marginBottom="20dp"
@@ -132,13 +123,13 @@
                 android:layout_below="@+id/cardView"
                 android:layout_marginTop="20dp"
                 app:cardCornerRadius="10dip"
-                app:cardElevation="2dip">
+                app:cardElevation="3dip">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <RadioButton
+                    <TextView
                         android:id="@+id/radRemittance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -196,10 +187,10 @@
                         android:id="@+id/imageView6"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-                        android:layout_alignParentBottom="true"
                         android:layout_alignStart="@+id/radRemittance"
-                        android:layout_marginBottom="14dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_alignTop="@+id/imageView4"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginTop="81dp"
                         android:src="@mipmap/ic_mlhuiller" />
 
                     <ImageView
@@ -209,6 +200,20 @@
                         android:layout_alignTop="@+id/imageView6"
                         android:src="@mipmap/ic_west"
                         android:layout_marginEnd="13dp" />
+
+                    <Button
+                        android:id="@+id/btnRemmit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageView6"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="11dp"
+                        android:backgroundTint="@color/com_facebook_button_background_color_pressed"
+                        android:fontFamily="@font/cantora_one"
+                        android:onClick="choose"
+                        android:text="Transact your Order"
+                        android:textAllCaps="false"
+                        android:textColor="@color/cardview_light_background" />
 
                 </RelativeLayout>
 

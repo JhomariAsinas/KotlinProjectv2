@@ -48,8 +48,6 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
         activity!!.startActivityForResult(int,50)
     }
 
-
-
     companion object {
         fun newInstance(): HomeFragment {
             var fragmentHome = HomeFragment()
