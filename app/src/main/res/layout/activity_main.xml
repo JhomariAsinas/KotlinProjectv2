@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.jhomasinas.mshopping.MainActivity">
+    tools:context="com.example.jhomasinas.mshopping.Activity.MainActivity">
 
     <FrameLayout
         android:id="@+id/content"

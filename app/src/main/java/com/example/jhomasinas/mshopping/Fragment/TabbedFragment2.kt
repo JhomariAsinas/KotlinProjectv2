@@ -1,4 +1,4 @@
-package com.example.jhomasinas.mshopping
+package com.example.jhomasinas.mshopping.Fragment
 
 
 import android.os.Bundle
@@ -6,15 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import com.example.jhomasinas.mshopping.Config.ProductApi
-import com.example.jhomasinas.mshopping.Config.ProductResponse
-import com.example.jhomasinas.mshopping.Config.SharedPref
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.toast
+import com.example.jhomasinas.mshopping.R
 
 
 /**

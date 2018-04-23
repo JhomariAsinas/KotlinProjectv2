@@ -1,4 +1,4 @@
-package com.example.jhomasinas.mshopping
+package com.example.jhomasinas.mshopping.Fragment
 
 
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import com.example.jhomasinas.mshopping.Config.SharedPref
+import com.example.jhomasinas.mshopping.R
 
 
 /**

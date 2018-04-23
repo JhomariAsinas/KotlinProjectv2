@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference android:title="Activate Solo Code"
+        android:icon="@drawable/ic_style_black_24dp">
+    </Preference>
+    <Preference
+        android:title="Update Your Profile"
+        android:icon="@drawable/ic_account_circle_black_24dp">
+    </Preference>
+    <Preference
+        android:title="About"
+        android:icon="@drawable/ic_info_black_24dp">
+    </Preference>
+</PreferenceScreen>

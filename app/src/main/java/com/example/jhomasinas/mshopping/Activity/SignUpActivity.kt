@@ -1,9 +1,10 @@
-package com.example.jhomasinas.mshopping
+package com.example.jhomasinas.mshopping.Activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.jhomasinas.mshopping.Config.ProductApi
 import com.example.jhomasinas.mshopping.Config.ProductResponse
+import com.example.jhomasinas.mshopping.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -38,12 +39,19 @@ class SignUpActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        {result -> startActivity(intentFor<LoginActivity>())
-                                   toast("Account was created successfully")
-                                   finish()
-                        },
+                        {result -> handleResponse(result)},
                         {error  -> toast("Error ${error.localizedMessage}")}
                 )
+    }
+
+    fun handleResponse(response : ProductResponse){
+        if(response.response!!){
+            startActivity(intentFor<LoginActivity>())
+            toast("Account was created successfully")
+            finish()
+        }else{
+            toast("Cannot Sign In")
+        }
     }
 
 }

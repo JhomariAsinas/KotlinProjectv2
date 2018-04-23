@@ -1,4 +1,4 @@
-package com.example.jhomasinas.mshopping
+package com.example.jhomasinas.mshopping.Activity
 
 import android.app.Activity
 import android.support.design.widget.TabLayout
@@ -8,13 +8,14 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import com.example.jhomasinas.mshopping.Config.ProductApi
 import com.example.jhomasinas.mshopping.Config.ProductResponse
 import com.example.jhomasinas.mshopping.Config.SharedPref
+import com.example.jhomasinas.mshopping.R
+import com.example.jhomasinas.mshopping.Fragment.TabbedFragment1
+import com.example.jhomasinas.mshopping.Fragment.TabbedFragment2
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers

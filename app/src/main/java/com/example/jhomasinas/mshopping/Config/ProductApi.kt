@@ -27,51 +27,51 @@ interface ProductApi{
 
     @FormUrlEncoded
     @POST("admin/getCartdata")
-    abstract fun getCart(@Field("user") user:String): Observable<List<Cart>>
+    abstract fun getCart(@Field("user") user: String): Observable<List<Cart>>
 
     @FormUrlEncoded
     @POST("admin/signCustomer")
-    abstract fun signUp(@Field("username") user    :  String,
-               @Field("pass")     pass    :  String,
-               @Field("fname")    fname   :  String,
-               @Field("address")  add     :  String,
-               @Field("contact")  contact : String): Observable<ProductResponse>
+    abstract fun signUp(@Field("username") user:   String,
+                        @Field("pass")     pass:   String,
+                        @Field("fname")    fname:  String,
+                        @Field("address")  add:    String,
+                        @Field("contact")  contac: String): Observable<ProductResponse>
 
 
     @FormUrlEncoded
     @POST("admin/login")
-    abstract fun logIn(@Field("logusername")user : String,
-                       @Field("logpass")    pass : String): Observable<List<Customer>>
+    abstract fun logIn(@Field("logusername")user: String,
+                       @Field("logpass")    pass: String): Observable<List<Customer>>
 
     @FormUrlEncoded
     @POST("admin/addtoCart")
-    abstract fun addtoCart(@Field("code") code :String,
-                           @Field("items")items:String,
-                           @Field("user") user :String): Observable<ProductResponse>
+    abstract fun addtoCart(@Field("code") cod:   String,
+                           @Field("items")items: String,
+                           @Field("user") user:  String): Observable<ProductResponse>
 
     @FormUrlEncoded
     @POST("admin/deleteCartData")
-    abstract fun deleteCart(@Field("code") code : String,
-                            @Field("user") user : String ): Observable<ProductResponse>
+    abstract fun deleteCart(@Field("code") code: String,
+                            @Field("user") user: String ): Observable<ProductResponse>
 
     @FormUrlEncoded
     @POST("admin/transactProd")
-    abstract fun transactProd(@Field("code")    code    : String,
-                              @Field("address") address : String,
-                              @Field("name")    name    : String,
-                              @Field("contact") contact : String,
-                              @Field("user")    user    : String,
-                              @Field("payment") payment : String): Observable<ProductResponse>
+    abstract fun transactProd(@Field("code")    code:    String,
+                              @Field("address") address: String,
+                              @Field("name")    name:    String,
+                              @Field("contact") contact: String,
+                              @Field("user")    user:    String,
+                              @Field("payment") payment: String): Observable<ProductResponse>
 
     @FormUrlEncoded
     @POST("admin/updateAddress")
-    abstract fun updateAddress(@Field("user")    user    : String,
-                               @Field("address") address : String ): Observable<ProductResponse>
+    abstract fun updateAddress(@Field("user")    user:    String,
+                               @Field("address") address: String ): Observable<ProductResponse>
 
 
     @FormUrlEncoded
     @POST("admin/getApprovedProd")
-    abstract fun getTransact(@Field("user") user : String): Observable<List<Approved>>
+    abstract fun getTransact(@Field("user") user: String): Observable<List<Approved>>
 
     companion object {
         val BASE_URL = "http://192.168.1.50/mobilecom/"

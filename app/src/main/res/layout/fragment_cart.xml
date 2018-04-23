@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.jhomasinas.mshopping.CartFragment">
+    tools:context="com.example.jhomasinas.mshopping.Fragment.CartFragment">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -95,7 +95,7 @@ Addresss"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/happy_monkey"
-                android:text="There are no available items in Cart"
+                android:text="There are no items in your Cart"
                 android:textAlignment="center"
                 android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
@@ -133,7 +133,7 @@ Addresss"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/happy_monkey"
-                android:text="There are no available items in Cart"
+                android:text="No pending Orders"
                 android:textAlignment="center"
                 android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"

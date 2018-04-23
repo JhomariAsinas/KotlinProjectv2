@@ -1,4 +1,4 @@
-package com.example.jhomasinas.mshopping
+package com.example.jhomasinas.mshopping.Fragment
 
 
 import android.os.Bundle
@@ -8,13 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.example.jhomasinas.mshopping.Activity.LoginActivity
+import com.example.jhomasinas.mshopping.Activity.MainActivity
+import com.example.jhomasinas.mshopping.Activity.SignUpActivity
 import com.example.jhomasinas.mshopping.Config.SharedPref
-import kotlinx.android.synthetic.main.fragment_account.*
+import com.example.jhomasinas.mshopping.R
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.intentFor
+import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.yesButton
-import org.w3c.dom.Text
 
 
 /**
@@ -31,20 +34,19 @@ class AccountFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val root = inflater!!.inflate(R.layout.fragment_account, container, false)
+        val root = inflater.inflate(R.layout.fragment_account, container, false)
         btnSign     = root.findViewById(R.id.btnSignLayout)
         btnLog      = root.findViewById(R.id.btnLoginLayout)
         btnAccount  = root.findViewById(R.id.btnChangeAccount)
         txtHeader   = root.findViewById(R.id.textView12)
         txtUser     = root.findViewById(R.id.textView13)
         txtName     = root.findViewById(R.id.textView15)
-
         btnSign?.setOnClickListener { startActivity(intentFor<SignUpActivity>()) }
         btnLog?.setOnClickListener  { startActivity(intentFor<LoginActivity>())  }
 
         btnAccount?.setOnClickListener {
             alert("Are you sure you want to logout?") {
-                title = "Alert"
+                title = "LOGOUT"
                 yesButton { logout() }
                 noButton {  }
             }.show()
@@ -61,13 +63,18 @@ class AccountFragment : Fragment() {
              btnAccount?.visibility  = View.VISIBLE
              txtUser?.visibility     = View.VISIBLE
              txtName?.visibility     = View.VISIBLE
-             txtName?.text = SharedPref.getmInstance(activity!!).customerName
+             txtName?.text = SharedPref.getmInstance(activity).customerName
         }
     }
 
     fun logout(){
-        SharedPref.getmInstance(activity!!).logout()
-        startActivity(intentFor<MainActivity>())
+        if(SharedPref.getmInstance(activity!!).logout()){
+            startActivity(intentFor<MainActivity>())
+        }else{
+           toast("Failed to Logout")
+        }
+
     }
 
 }
+

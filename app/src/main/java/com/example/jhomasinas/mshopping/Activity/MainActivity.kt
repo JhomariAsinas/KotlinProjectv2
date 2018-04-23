@@ -1,16 +1,18 @@
-package com.example.jhomasinas.mshopping
+package com.example.jhomasinas.mshopping.Activity
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.widget.FrameLayout
+import com.example.jhomasinas.mshopping.Fragment.AccountFragment
+import com.example.jhomasinas.mshopping.Fragment.CartFragment
 import com.example.jhomasinas.mshopping.Config.SharedPref
+import com.example.jhomasinas.mshopping.Fragment.HomeFragment
+import com.example.jhomasinas.mshopping.R
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
     private var container: FrameLayout? = null
@@ -18,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                fragment = HomeFragment.Companion.newInstance()
+                fragment = HomeFragment.newInstance()
                 addFragment(fragment!!)
                 return@OnNavigationItemSelectedListener true
             }
@@ -61,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        fragment = HomeFragment.Companion.newInstance()
+        fragment = HomeFragment.newInstance()
         addFragment(fragment!!)
     }
 
@@ -75,13 +77,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if(fragment != null){
-           val fragment2: Fragment = HomeFragment.Companion.newInstance()
+           val fragment2: Fragment = HomeFragment.newInstance()
            addFragment(fragment2)
             fragment = null
         }else{
             super.onBackPressed()
         }
     }
+
+
 
 
 }

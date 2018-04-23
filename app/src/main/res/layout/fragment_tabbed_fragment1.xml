@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context="com.example.jhomasinas.mshopping.TabbedFragment1">
+    tools:context="com.example.jhomasinas.mshopping.Fragment.TabbedFragment1">
 
 
     <View
@@ -124,7 +124,6 @@
         android:layout_below="@+id/editContact"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:backgroundTint="@color/com_facebook_messenger_blue"
         android:fontFamily="@font/happy_monkey"
         android:text="Save INFORMATION"
         android:textColor="@color/cardview_light_background"

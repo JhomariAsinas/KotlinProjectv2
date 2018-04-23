@@ -1,4 +1,4 @@
-package com.example.jhomasinas.mshopping
+package com.example.jhomasinas.mshopping.Fragment
 
 
 import android.app.ProgressDialog
@@ -12,19 +12,17 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageView
+import com.example.jhomasinas.mshopping.Activity.ProductDetail
 import com.example.jhomasinas.mshopping.Adapter.ProductAdapter
 import com.example.jhomasinas.mshopping.Config.ProductApi
 import com.example.jhomasinas.mshopping.Model.Product
+import com.example.jhomasinas.mshopping.R
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_product_detail.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import org.jetbrains.anko.support.v4.indeterminateProgressDialog
-import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 
 
@@ -37,7 +35,7 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
     }
 
     override fun onClickProduct(product: Product) {
-        val int : Intent = Intent(activity,ProductDetail::class.java)
+        val int : Intent = Intent(activity, ProductDetail::class.java)
         int.putExtra("Code"    ,product.product_code)
         int.putExtra("Name"    ,product.product_name)
         int.putExtra("Category",product.product_category)
@@ -67,7 +65,7 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
     var progressDialog : ProgressDialog? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root =  inflater !!.inflate(R.layout.fragment_home, container, false)
+        val root =  inflater.inflate(R.layout.fragment_home, container, false)
 
         swipe = root.findViewById(R.id.mSwipeRefreshLayout)
         recyclerView1  = root.findViewById(R.id.recyclerView)as RecyclerView
