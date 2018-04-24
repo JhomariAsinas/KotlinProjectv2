@@ -9,11 +9,11 @@
     tools:context="com.example.jhomasinas.mshopping.Activity.MainActivity">
 
     <FrameLayout
-        android:id="@+id/content"
+        android:id="@+id/container2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-    </FrameLayout>
+        android:layout_weight="1"/>
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

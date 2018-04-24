@@ -1,16 +1,19 @@
 package com.example.jhomasinas.mshopping.Activity
 
 import android.app.Activity
+import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import com.example.jhomasinas.mshopping.Config.ProductApi
 import com.example.jhomasinas.mshopping.Config.SharedPref
 import com.example.jhomasinas.mshopping.R
@@ -19,6 +22,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_product_detail.*
+import me.pushy.sdk.Pushy
+import me.pushy.sdk.util.exceptions.PushyException
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
@@ -52,10 +57,10 @@ class ProductDetail : AppCompatActivity() {
         prodCategory.text  = intent.getStringExtra("Category")
         code               = intent.getStringExtra("Code")
         items1             = intent.getStringExtra("Items")
-        prodPrice2.text    = intent.getStringExtra("Price")
+        prodPrice2.text    = "$"+intent.getStringExtra("Price")+".00"
         prodCode.text      = code
         prodimg            = intent.getStringExtra("Image")
-        prodItems.text     = items1
+        prodItems.text     = items1+" Items Available"
 
         loadImg()
 
@@ -75,7 +80,7 @@ class ProductDetail : AppCompatActivity() {
 
     fun loadImg(){
         Picasso.get()
-                .load("http://192.168.1.50/e-commerce/assets/image/"+prodimg)
+                .load("http://192.168.1.17/e-commerce/assets/image/"+prodimg)
                 .resize(450, 450)
                 .centerCrop()
                 .into(viewProd)
@@ -93,7 +98,7 @@ class ProductDetail : AppCompatActivity() {
                                         .setAction("Go to Cart", { setResult(Activity.RESULT_OK, intent.putExtra("asdss", "asds"))
                                             finish()}).show()
                             }else{
-                                toast("Failed Adding on your Cart")
+                                toast("Items Already in your Cart")
                             }},
                         {error ->  toast("Error ${error.localizedMessage}")}
                 )
@@ -116,16 +121,16 @@ class ProductDetail : AppCompatActivity() {
         }
 
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            val items2 = inputItems.text.toString()
-            if(items2 > items1!!){
+            val items2 = inputItems.text.toString().toInt()
+            if(items2 > items1.toString().toInt()){
                 toast("Insufficient Items for your Order")
             }else{
-                addtoCart(items2)
+                addtoCart(items2.toString())
                 dialog.dismiss()
-
             }
         }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu,menu)

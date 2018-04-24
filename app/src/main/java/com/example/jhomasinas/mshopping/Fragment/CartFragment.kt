@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.example.jhomasinas.mshopping.Activity.LoginActivity
 import com.example.jhomasinas.mshopping.Activity.PaymentActivity
 import com.example.jhomasinas.mshopping.Adapter.CartAdapter
 import com.example.jhomasinas.mshopping.Adapter.ProcessAdapter
@@ -27,6 +28,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_cart.*
 import org.jetbrains.anko.support.v4.indeterminateProgressDialog
+import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 
 
@@ -47,6 +49,7 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
 
     companion object {
         private const val REQUEST_PLACE_PICKER = 1
+
     }
 
     val productApiserve by lazy {
@@ -67,6 +70,9 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        if(!SharedPref.getmInstance(activity).isLoggedIn){
+            startActivity(intentFor<LoginActivity>())
+        }
         val root = inflater.inflate(R.layout.fragment_cart, container, false)
 
         processWarning   = root.findViewById(R.id.processWarning)
@@ -143,14 +149,17 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
 
     fun handleCart(cartList: List<Cart>) {
         if(cartList == null || cartList.isEmpty()){
-            cartWarning?.visibility  = View.VISIBLE
-            progressCart.visibility = View.GONE
+              val mCartList: ArrayList<Cart> = ArrayList(cartList)
+              val adapter = CartAdapter(mCartList,this)
+              cartRecycler?.adapter   = adapter
+              cartWarning?.visibility  = View.VISIBLE
+              progressCart.visibility = View.GONE
         }else{
-            val mCartList: ArrayList<Cart> = ArrayList(cartList)
-            val adapter = CartAdapter(mCartList,this)
-            cartRecycler?.adapter   = adapter
-            cartWarning?.visibility = View.GONE
-            progressCart.visibility = View.GONE
+              val mCartList: ArrayList<Cart> = ArrayList(cartList)
+              val adapter = CartAdapter(mCartList,this)
+              cartRecycler?.adapter   = adapter
+              cartWarning?.visibility = View.GONE
+              progressCart.visibility = View.GONE
 
         }
 
@@ -213,7 +222,7 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
             if(resultCode == RESULT_OK){
                 val place = PlacePicker.getPlace(activity!!,data)
                 var addresstext = place.name.toString()
-                addresstext += "\n" + place.address.toString()
+                addresstext += " ${place.address.toString()}"
                 updateAdd(addresstext)
             }
         }
@@ -228,4 +237,11 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
             e.printStackTrace()
         }
     }
+
+    override fun onStop() {
+        super.onStop()
+        disposable?.dispose()
+    }
+
+
 }

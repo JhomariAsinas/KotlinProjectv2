@@ -31,11 +31,12 @@ interface ProductApi{
 
     @FormUrlEncoded
     @POST("admin/signCustomer")
-    abstract fun signUp(@Field("username") user:   String,
-                        @Field("pass")     pass:   String,
-                        @Field("fname")    fname:  String,
-                        @Field("address")  add:    String,
-                        @Field("contact")  contac: String): Observable<ProductResponse>
+    abstract fun signUp(@Field("username")    user:    String,
+                        @Field("pass")        pass:    String,
+                        @Field("fname")       fname:   String,
+                        @Field("address")     add:     String,
+                        @Field("contact")     contact: String,
+                        @Field("deviceToken") deviceT: String): Observable<ProductResponse>
 
 
     @FormUrlEncoded
@@ -74,7 +75,7 @@ interface ProductApi{
     abstract fun getTransact(@Field("user") user: String): Observable<List<Approved>>
 
     companion object {
-        val BASE_URL = "http://192.168.1.50/mobilecom/"
+        val BASE_URL = "http://192.168.1.17/mobilecom/"
         fun create(): ProductApi{
             val retrofit = Retrofit.Builder()
                     .baseUrl(BASE_URL)

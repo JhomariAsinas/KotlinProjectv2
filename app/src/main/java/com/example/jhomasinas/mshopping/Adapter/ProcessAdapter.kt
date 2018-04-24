@@ -40,7 +40,7 @@ class ProcessAdapter(val processlist: ArrayList<Approved>): RecyclerView.Adapter
             }
 
         Picasso.get()
-                .load("http://192.168.1.50/e-commerce/assets/image/"+approved.product_image)
+                .load("http://192.168.1.17/e-commerce/assets/image/"+approved.product_image)
                 .resize(350, 350)
                 .centerCrop()
                 .into(holder?.prodImage)
