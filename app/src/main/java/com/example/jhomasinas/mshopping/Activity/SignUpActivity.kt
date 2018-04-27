@@ -19,6 +19,7 @@ import org.jetbrains.anko.toast
 
 class SignUpActivity : AppCompatActivity() {
     private var deviceToken: String? = null
+
     val productApiserve by lazy {
         ProductApi.create()
     }

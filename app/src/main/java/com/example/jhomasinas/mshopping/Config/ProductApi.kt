@@ -23,15 +23,15 @@ import retrofit2.http.POST
 interface ProductApi{
 
     @GET("admin/showSelprod/All")
-    abstract fun getProduct(): Observable<List<Product>>
+    fun getProduct(): Observable<List<Product>>
 
     @FormUrlEncoded
     @POST("admin/getCartdata")
-    abstract fun getCart(@Field("user") user: String): Observable<List<Cart>>
+    fun getCart(@Field("user") user: String): Observable<List<Cart>>
 
     @FormUrlEncoded
     @POST("admin/signCustomer")
-    abstract fun signUp(@Field("username")    user:    String,
+             fun signUp(@Field("username")    user:    String,
                         @Field("pass")        pass:    String,
                         @Field("fname")       fname:   String,
                         @Field("address")     add:     String,
@@ -41,23 +41,23 @@ interface ProductApi{
 
     @FormUrlEncoded
     @POST("admin/login")
-    abstract fun logIn(@Field("logusername")user: String,
+             fun logIn(@Field("logusername")user: String,
                        @Field("logpass")    pass: String): Observable<List<Customer>>
 
     @FormUrlEncoded
     @POST("admin/addtoCart")
-    abstract fun addtoCart(@Field("code") cod:   String,
+             fun addtoCart(@Field("code") cod:   String,
                            @Field("items")items: String,
                            @Field("user") user:  String): Observable<ProductResponse>
 
     @FormUrlEncoded
     @POST("admin/deleteCartData")
-    abstract fun deleteCart(@Field("code") code: String,
+             fun deleteCart(@Field("code") code: String,
                             @Field("user") user: String ): Observable<ProductResponse>
 
     @FormUrlEncoded
     @POST("admin/transactProd")
-    abstract fun transactProd(@Field("code")    code:    String,
+              fun transactProd(@Field("code")   code:    String,
                               @Field("address") address: String,
                               @Field("name")    name:    String,
                               @Field("contact") contact: String,
@@ -66,13 +66,24 @@ interface ProductApi{
 
     @FormUrlEncoded
     @POST("admin/updateAddress")
-    abstract fun updateAddress(@Field("user")    user:    String,
+             fun updateAddress(@Field("user")    user:    String,
                                @Field("address") address: String ): Observable<ProductResponse>
 
 
     @FormUrlEncoded
     @POST("admin/getApprovedProd")
-    abstract fun getTransact(@Field("user") user: String): Observable<List<Approved>>
+         fun getTransact(@Field("user") user: String): Observable<List<Approved>>
+
+    @FormUrlEncoded
+    @POST("admin/updateCartData")
+    fun updateCart(@Field("code")     code:  String,
+                   @Field("username") user:  String,
+                   @Field("quantity") items: String): Observable<ProductResponse>
+
+
+    @FormUrlEncoded
+    @POST("admin/getNoCart")
+    fun getCartNo(@Field("username") code:  String):Observable<ProductResponse>
 
     companion object {
         val BASE_URL = "http://192.168.1.17/mobilecom/"

@@ -1,18 +1,27 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.jhomasinas.mshopping.Activity
 
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.internal.BottomNavigationItemView
+import android.support.design.internal.BottomNavigationMenuView
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.view.MenuItemCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
+import android.view.View
 import android.widget.FrameLayout
+import android.widget.TextView
 import com.example.jhomasinas.mshopping.Config.SharedPref
 import com.example.jhomasinas.mshopping.Fragment.*
 import com.example.jhomasinas.mshopping.R
 import kotlinx.android.synthetic.main.activity_main.*
 import me.pushy.sdk.Pushy
 import org.jetbrains.anko.intentFor
+import q.rorbin.badgeview.QBadgeView
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private var fragmentint: Int? = null
     private var container:   FrameLayout? = null
     private var fragment:    Fragment? = null
+    private var txtCartItem: TextView? = null
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -49,7 +59,6 @@ class MainActivity : AppCompatActivity() {
         true
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == 50 && data != null){
@@ -58,6 +67,7 @@ class MainActivity : AppCompatActivity() {
                 addFragment(fragment!!)
                 fragmentint = 2
                 navigation.menu.getItem(1).setChecked(true)
+                setBadge()
             }else{
                 startActivity(intentFor<LoginActivity>())
             }
@@ -65,8 +75,9 @@ class MainActivity : AppCompatActivity() {
         }else if(requestCode == 60 && data!= null){
             fragment = CartFragment()
             addFragment(fragment!!)
-            fragmentint =2
+            fragmentint = 2
             navigation.menu.getItem(1).setChecked(true)
+            setBadge()
         }
     }
 
@@ -78,6 +89,7 @@ class MainActivity : AppCompatActivity() {
         fragment = HomeFragment.newInstance()
         addFragment(fragment!!)
         fragmentint = 1
+        checkBadge()
     }
 
     private fun addFragment(fragment: Fragment){
@@ -98,6 +110,37 @@ class MainActivity : AppCompatActivity() {
             navigation.menu.getItem(0).setChecked(true)
         }
     }
+
+    fun setBadge(){
+        val bottomNavigationMenuView : BottomNavigationMenuView = navigation.getChildAt(0) as BottomNavigationMenuView
+        val v : View = bottomNavigationMenuView.getChildAt(1)
+        val items = SharedPref.getmInstance(this).badgeCount
+        if(items?.toInt() == 0){
+            return
+        }else{
+            QBadgeView(this).bindTarget(v)
+                    .setBadgeNumber(items!!.toInt())
+                    .setGravityOffset(30f,1f,true)
+                    .setShowShadow(false)
+        }
+
+    }
+
+    fun checkBadge(){
+        if(SharedPref.getmInstance(this).isLoggedIn){
+            setBadge()
+        }else{
+            SharedPref.getmInstance(this).getItems(0.toString())
+            setBadge()
+        }
+    }
+
+
+
+
+
+
+
 
 
 

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/colorEdgeEffect"
         app:titleTextColor="@color/cardview_light_background"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar">
 
     </android.support.v7.widget.Toolbar>
 
@@ -44,16 +44,17 @@
                 android:id="@+id/prodName2"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:fontFamily="@font/cherry_cream_soda"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/cantora_one"
+                android:gravity="center_vertical"
                 android:maxLines="2"
                 android:text="Product Name"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:minTextSize="8sp"
                 app:sizeToFit="true" />
@@ -132,13 +133,12 @@
                     android:layout_above="@+id/prodDes"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="right"
-                    android:fontFamily="@font/happy_monkey"
+                    android:fontFamily="@font/cantora_one"
                     android:text="Description"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -147,13 +147,12 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignStart="@+id/textView7"
                     android:layout_gravity="right"
-                    android:fontFamily="@font/happy_monkey"
+                    android:fontFamily="@font/cantora_one"
                     android:text="Price:"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
+                    android:textSize="19sp" />
 
                 <TextView
                     android:id="@+id/textView7"
@@ -162,13 +161,12 @@
                     android:layout_alignStart="@+id/textView8"
                     android:layout_alignTop="@+id/prodCategory"
                     android:layout_gravity="right"
-                    android:fontFamily="@font/happy_monkey"
+                    android:fontFamily="@font/cantora_one"
                     android:text="Category:"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
+                    android:textSize="19sp" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -177,13 +175,12 @@
                     android:layout_alignStart="@+id/textView9"
                     android:layout_alignTop="@+id/prodItems"
                     android:layout_gravity="right"
-                    android:fontFamily="@font/happy_monkey"
+                    android:fontFamily="@font/cantora_one"
                     android:text="Items:"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
+                    android:textSize="19sp" />
 
                 <TextView
                     android:id="@+id/textView9"
@@ -193,13 +190,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_gravity="right"
                     android:layout_marginStart="22dp"
-                    android:fontFamily="@font/happy_monkey"
+                    android:fontFamily="@font/cantora_one"
                     android:text="Product Code:"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
+                    android:textSize="19sp" />
 
                 <me.grantland.widget.AutofitTextView
                     android:id="@+id/prodDes"
@@ -210,12 +206,13 @@
                     android:layout_gravity="right"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/cantora_one"
-                    android:maxLines="3"
+                    android:maxLines="5"
                     android:padding="10dp"
+                    android:gravity="center_vertical"
                     android:text="Size Large 2x2 mraming cheeseseeeeeeee"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:minTextSize="8sp"
@@ -228,12 +225,14 @@
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/holo_blue_bright"
-                android:fontFamily="@font/chango"
-                android:text="Add to Cart"
+                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginBottom="20dp"/>
+                android:backgroundTint="@android:color/holo_blue_bright"
+                android:fontFamily="@font/happy_monkey"
+                android:text="Add to Cart"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
 
 
         </LinearLayout>

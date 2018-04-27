@@ -16,10 +16,13 @@ import android.widget.ImageView
 import com.example.jhomasinas.mshopping.Activity.ProductDetail
 import com.example.jhomasinas.mshopping.Adapter.ProductAdapter
 import com.example.jhomasinas.mshopping.Config.ProductApi
+import com.example.jhomasinas.mshopping.Config.ProductResponse
+import com.example.jhomasinas.mshopping.Config.SharedPref
 import com.example.jhomasinas.mshopping.Model.Product
 import com.example.jhomasinas.mshopping.R
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.support.v4.indeterminateProgressDialog
@@ -60,7 +63,7 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
         ProductApi.create()
     }
 
-    var disposable : Disposable? = null
+    var disposable = CompositeDisposable()
     var swipe : SwipeRefreshLayout? = null
     var progressDialog : ProgressDialog? = null
 
@@ -92,27 +95,27 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
     }
 
     fun getProduct(){
-        disposable = productApiserve.getProduct()
+        disposable.add(productApiserve.getProduct()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {result -> handleResponse(result)},
                         {error  ->  toast("Error ${error.localizedMessage}")
                             progressDialog!!.dismiss()}
-                )
+                ))
     }
 
-    override fun onPause() {
-        super.onPause()
-        disposable?.dispose()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        disposable.clear()
     }
 
     fun handleResponse(product: List<Product>){
         val mArrayProduct: ArrayList<Product> = ArrayList(product)
         val adapter = ProductAdapter(mArrayProduct,this)
         recyclerView1!!.adapter = adapter
+        getCount()
         progressDialog?.dismiss()
-
 
     }
 
@@ -133,5 +136,26 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
             dialog.show()
 
     }
+
+    fun getCount(){
+        disposable.add(productApiserve.getCartNo(SharedPref.getmInstance(activity).customerUser!!)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {result -> responseItems(result)  },
+                        {error  -> toast("Error ${error.localizedMessage}") }
+                ))
+    }
+
+    fun responseItems(response: ProductResponse){
+        if(response.items == 0){
+            val items = 0
+            SharedPref.getmInstance(activity).getItems(items.toString())
+        }else{
+            SharedPref.getmInstance(activity).getItems(response.items!!.toString())
+        }
+    }
+
+
 
 }// Required empty public constructor

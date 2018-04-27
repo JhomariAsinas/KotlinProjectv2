@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.jhomasinas.mshopping.Activity
 
 import android.app.Activity
@@ -5,6 +7,8 @@ import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.view.MenuItemCompat
+import android.support.v4.view.MenuItemCompat.getActionView
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.util.Log
@@ -13,18 +17,22 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.jhomasinas.mshopping.Config.ProductApi
+import com.example.jhomasinas.mshopping.Config.ProductResponse
 import com.example.jhomasinas.mshopping.Config.SharedPref
 import com.example.jhomasinas.mshopping.R
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_product_detail.*
 import me.pushy.sdk.Pushy
 import me.pushy.sdk.util.exceptions.PushyException
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
 
 class ProductDetail : AppCompatActivity() {
@@ -32,13 +40,15 @@ class ProductDetail : AppCompatActivity() {
     val productApiserve by lazy {
         ProductApi.create()
     }
-    var disposable : Disposable? = null
+    var disposable = CompositeDisposable()
 
     var code:    String? = null
     var prodimg: String? = null
     var items1:  String? = null
     var view: View?      = null
     var bool: Boolean?   = null
+    var textCartItem: TextView? = null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,7 +98,7 @@ class ProductDetail : AppCompatActivity() {
 
     fun addtoCart(items3: String){
         val user = SharedPref.getmInstance(this).customerUser
-        disposable = productApiserve.addtoCart(code!!,items3,user!!)
+        disposable.add( productApiserve.addtoCart(code!!,items3,user!!)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -97,11 +107,12 @@ class ProductDetail : AppCompatActivity() {
                                 Snackbar.make(view!!, "Added to Cart Successfully", Snackbar.LENGTH_LONG)
                                         .setAction("Go to Cart", { setResult(Activity.RESULT_OK, intent.putExtra("asdss", "asds"))
                                             finish()}).show()
+                                getCount()
                             }else{
                                 toast("Items Already in your Cart")
                             }},
                         {error ->  toast("Error ${error.localizedMessage}")}
-                )
+                ))
     }
 
     fun dialogCart(){
@@ -121,19 +132,31 @@ class ProductDetail : AppCompatActivity() {
         }
 
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            val items2 = inputItems.text.toString().toInt()
-            if(items2 > items1.toString().toInt()){
-                toast("Insufficient Items for your Order")
-            }else{
-                addtoCart(items2.toString())
-                dialog.dismiss()
-            }
+            val items2 = inputItems.text.toString()
+                if(items2 == ""){
+                    toast("Enter the no. of Order")
+                }else{
+                    if(items2.toInt() > items1.toString().toInt()){
+                        toast("Insufficient Items for your Order")
+                    }else{
+                        addtoCart(items2.toString())
+                        dialog.dismiss()
+                    }
+                }
         }
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu,menu)
+        val menuItem = menu?.findItem(R.id.cartFrag)
+        val actionView = MenuItemCompat.getActionView(menuItem)
+        textCartItem = actionView.findViewById(R.id.cart_Badge)
+        setupBadge()
+
+        actionView.setOnClickListener {
+            onOptionsItemSelected(menuItem!!)
+        }
         return true
     }
 
@@ -144,7 +167,7 @@ class ProductDetail : AppCompatActivity() {
                 finish()
                 return true
             }
-            R.id.settingsCart ->{
+            R.id.settingsCart -> {
                 startActivity(intentFor<SettingsActivity>())
                 return true
             }
@@ -152,4 +175,40 @@ class ProductDetail : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable.clear()
+    }
+
+
+    fun setupBadge(){
+        val items = SharedPref.getmInstance(this).badgeCount
+        if (items!!.toInt() == 0){
+            textCartItem?.visibility = View.GONE
+        }else{
+            textCartItem?.setText(items)
+            textCartItem?.visibility = View.VISIBLE
+        }
+
+    }
+
+    fun getCount(){
+        disposable.add(productApiserve.getCartNo(SharedPref.getmInstance(this).customerUser!!)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {result -> responseItems(result)  },
+                        {error  -> toast("Error ${error.localizedMessage}") }
+                ))
+    }
+
+    fun responseItems(response: ProductResponse){
+        if(response.items == 0){
+            val items = 0
+            SharedPref.getmInstance(this).getItems(items.toString())
+        }else{
+            SharedPref.getmInstance(this).getItems(response.items!!.toString())
+            setupBadge()
+        }
+    }
 }

@@ -94,13 +94,13 @@ Addresss"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:fontFamily="@font/happy_monkey"
+                android:fontFamily="@font/cantora_one"
                 android:text="There are no items in your Cart"
                 android:textAlignment="center"
-                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerCard"
@@ -132,13 +132,13 @@ Addresss"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:fontFamily="@font/happy_monkey"
+                android:fontFamily="@font/cantora_one"
                 android:text="No pending Orders"
                 android:textAlignment="center"
-                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerProcess"

@@ -7,6 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 26
     defaultConfig {
+        multiDexEnabled true
         applicationId "com.example.jhomasinas.mshopping"
         minSdkVersion 22
         targetSdkVersion 26
@@ -45,6 +46,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
     implementation 'org.jetbrains.anko:anko:0.10.4'
+    implementation 'q.rorbin:badgeview:1.1.2'
     implementation 'me.pushy:sdk:1.0.31'
     implementation 'me.grantland:autofittextview:0.2.+'
     testImplementation 'junit:junit:4.12'

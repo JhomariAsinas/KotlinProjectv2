@@ -7,6 +7,7 @@ import com.example.jhomasinas.mshopping.Config.SharedPref
 import com.example.jhomasinas.mshopping.Model.Customer
 import com.example.jhomasinas.mshopping.R
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login.*
@@ -19,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
         ProductApi.create()
     }
 
-    var disposable : Disposable? = null
+    var disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     fun login(){
-        disposable = productApiserve.logIn(logUsername.text.toString(),logPassword.text.toString())
+        disposable.add(productApiserve.logIn(logUsername.text.toString(),logPassword.text.toString())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -42,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
                             toast("Invalid Account")
                         }},
                         {error -> toast("Error ${error.localizedMessage}")}
-                )
+                ))
     }
 
     fun handleResponse(user: List<Customer>){
@@ -56,11 +57,13 @@ class LoginActivity : AppCompatActivity() {
                     user.get(0).customer_contact
             )
             toast("Your account was login successfully")
-            startActivity(intentFor<MainActivity>())
+            finish()
         }
 
     }
 
-
-
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable.clear()
+    }
 }

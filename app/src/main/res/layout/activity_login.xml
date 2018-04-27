@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:fontFamily="@font/chango"
+        android:fontFamily="@font/cantora_one"
         android:text="Login Your Account Now!"
         android:textColor="@android:color/holo_red_light"
         android:textSize="14sp" />
@@ -51,7 +51,7 @@
             android:id="@+id/logUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/happy_monkey"
+            android:fontFamily="@font/cantora_one"
             android:hint="  Account Username"
             android:inputType="textCapSentences"
             android:textAlignment="center"
@@ -75,7 +75,7 @@
             style="@style/Widget.Design.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/happy_monkey"
+            android:fontFamily="@font/cantora_one"
             android:hint="  Account Password"
             android:inputType="textPassword"
             android:textAlignment="center"
@@ -93,8 +93,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
         android:backgroundTint="@android:color/holo_blue_bright"
-        android:fontFamily="@font/chango"
-        android:text="LOGIN" />
+        android:fontFamily="@font/happy_monkey"
+        android:text="LOGIN"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <View
         android:layout_width="match_parent"
@@ -108,15 +110,15 @@
         android:id="@+id/view" />
 
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/chango"
+        android:fontFamily="@font/cantora_one"
         android:text="No Account ???"
-        android:textColor="@android:color/holo_red_light"
-        android:id="@+id/textView3" />
+        android:textColor="@android:color/holo_red_light" />
 
     <Button
         android:id="@+id/btnSignUp"
@@ -126,8 +128,10 @@
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/chango"
-        android:text="SIGN UP NOW!" />
+        android:fontFamily="@font/happy_monkey"
+        android:text="SIGN UP NOW!"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

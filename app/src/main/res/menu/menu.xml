@@ -5,8 +5,11 @@
     <item android:title="Cart"
           app:showAsAction="always"
           android:id="@+id/cartFrag"
+          app:actionLayout="@layout/custom_action_layout"
           android:icon="@drawable/ic_shopping_cart_black_24dp"/>
+
     <item android:title="Settings"
           android:id="@+id/settingsCart"
           app:showAsAction="never"/>
+
 </menu>

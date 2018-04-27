@@ -17,6 +17,7 @@ import com.example.jhomasinas.mshopping.R
 import com.example.jhomasinas.mshopping.Fragment.TabbedFragment1
 import com.example.jhomasinas.mshopping.Fragment.TabbedFragment2
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -30,7 +31,7 @@ class PaymentActivity : AppCompatActivity() {
         ProductApi.create()
     }
 
-    var disposable : Disposable? = null
+    var disposable = CompositeDisposable()
 
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
@@ -56,10 +57,6 @@ class PaymentActivity : AppCompatActivity() {
 
     }
 
-    /**
-     * A [FragmentPagerAdapter] that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment? {
@@ -90,7 +87,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     fun Transaction(payment:String){
-        disposable = productApiserve.transactProd(
+        disposable.add(productApiserve.transactProd(
                 SharedPref.getmInstance(this).codeProd!!,
                 SharedPref.getmInstance(this).customerAddress!!,
                 SharedPref.getmInstance(this).customerName!!,
@@ -102,7 +99,7 @@ class PaymentActivity : AppCompatActivity() {
                 .subscribe(
                         {result -> handleResponse(result)},
                         {error  -> toast("Error ${error.localizedMessage}") }
-                )
+                ))
     }
 
     fun handleResponse(response: ProductResponse){
@@ -115,4 +112,8 @@ class PaymentActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable.clear()
+    }
 }

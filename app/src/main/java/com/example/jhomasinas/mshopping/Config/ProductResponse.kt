@@ -7,8 +7,10 @@ import com.google.gson.annotations.SerializedName
  */
 class ProductResponse {
 
-    @SerializedName("response")
-    var response: Boolean? = null
+    @SerializedName("response") var response: Boolean? = null
+
+    @SerializedName("items")
+    var items: Int? = null
 
 
 }

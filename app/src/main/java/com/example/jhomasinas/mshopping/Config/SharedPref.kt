@@ -50,6 +50,12 @@ class SharedPref private constructor(context: Context) {
             return sharedPreferences.getString(KEY_CODE, null)
         }
 
+    val badgeCount: String?
+        get() {
+            val sharedPreferences = con.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getString(KEY_ITEMS, null)
+        }
+
     init {
         con = context
     }
@@ -75,6 +81,18 @@ class SharedPref private constructor(context: Context) {
         val edit = sharedPreferences.edit()
 
         edit.putString(KEY_ADDRESS, address)
+
+        edit.apply()
+
+        return true
+    }
+
+    fun getItems(items: String): Boolean {
+
+        val sharedPreferences = con.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val edit = sharedPreferences.edit()
+
+        edit.putString(KEY_ITEMS, items)
 
         edit.apply()
 
@@ -113,6 +131,7 @@ class SharedPref private constructor(context: Context) {
         private val KEY_ADDRESS = "address"
         private val KEY_CONTACT = "srcode"
         private val KEY_CODE = "code"
+        private val KEY_ITEMS = "items"
 
         @Synchronized
         fun getmInstance(context: Context): SharedPref {

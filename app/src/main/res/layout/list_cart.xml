@@ -24,21 +24,24 @@
             android:id="@+id/cartName"
             android:layout_width="200dp"
             android:layout_height="60dp"
-            android:layout_alignParentEnd="true"
+            android:layout_alignEnd="@+id/cartItems"
             android:layout_alignTop="@+id/cartImage"
-            android:layout_marginEnd="21dp"
+            android:layout_marginEnd="17dp"
             android:fontFamily="@font/cantora_one"
             android:gravity="center_vertical"
             android:maxLines="2"
-            app:minTextSize="8sp"
-            app:sizeToFit="true"
-            android:paddingRight="5dp"
             android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:text="Spicy Chicken Burger "
             android:textAlignment="center"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:minTextSize="8sp"
+            app:sizeToFit="true" />
+
+
+
 
         <TextView
             android:id="@+id/cartItems"
@@ -57,9 +60,8 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_above="@+id/view2"
-            android:layout_alignStart="@+id/btnRemove"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="70dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toEndOf="@+id/textView8"
             android:fontFamily="@font/cantora_one"
             android:text="$15000.00"
             android:textAlignment="center"
@@ -107,31 +109,26 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/view2"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="7dp"
-            android:layout_toStartOf="@+id/textView8"
             android:fontFamily="@font/cantora_one"
             android:text="Checkout"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnRemove"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="150dp"
+
+        <TextView
+            android:id="@+id/textViewOptions"
+            android:layout_width="10dp"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/btnTransact"
-            android:layout_alignBottom="@+id/btnTransact"
-            android:layout_alignEnd="@+id/cartName"
-            android:layout_marginEnd="11dp"
-            android:fontFamily="@font/cantora_one"
-            android:text="Remove"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-
-
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="&#8942;"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="13dp"
+            android:textAppearance="?android:textAppearanceLarge" />
 
     </RelativeLayout>
 

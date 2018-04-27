@@ -6,6 +6,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -13,10 +14,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.example.jhomasinas.mshopping.Activity.LoginActivity
+import com.example.jhomasinas.mshopping.Activity.MainActivity
 import com.example.jhomasinas.mshopping.Activity.PaymentActivity
 import com.example.jhomasinas.mshopping.Adapter.CartAdapter
 import com.example.jhomasinas.mshopping.Adapter.ProcessAdapter
 import com.example.jhomasinas.mshopping.Config.ProductApi
+import com.example.jhomasinas.mshopping.Config.ProductResponse
 import com.example.jhomasinas.mshopping.Config.SharedPref
 import com.example.jhomasinas.mshopping.Model.Approved
 import com.example.jhomasinas.mshopping.Model.Cart
@@ -24,18 +27,24 @@ import com.example.jhomasinas.mshopping.R
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.location.places.ui.PlacePicker
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_cart.*
 import org.jetbrains.anko.support.v4.indeterminateProgressDialog
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.toast
 
 
 /**
  * A simple [Fragment] subclass.
  */
 class CartFragment : Fragment(),CartAdapter.Delegate {
+    override fun onEditCart(cart: Cart) {
+        dialogEdit()
+    }
+
     override fun onTransactCart(cart: Cart) {
         val int = Intent(activity, PaymentActivity::class.java)
         SharedPref.getmInstance(activity!!).addProd(cart.product_code)
@@ -56,7 +65,7 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
         ProductApi.create()
     }
 
-    var disposable : Disposable? = null
+    var disposable  = CompositeDisposable()
     var textAddress : TextView?  = null
 
     var bool : Boolean? = null
@@ -111,52 +120,52 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
 
     fun getCart(){
         val user = SharedPref.getmInstance(activity!!).customerUser
-       disposable = productApiserve.getCart(user!!)
+        disposable.add(productApiserve.getCart(user!!)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 {result -> handleCart(result)},
                                 {error  -> toast("Error ${error.localizedMessage}")}
-                        )
+                        ))
     }
 
     fun getApproved(){
         val user = SharedPref.getmInstance(activity!!).customerUser
-        disposable = productApiserve.getTransact(user!!)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        {result -> handleOrder(result)},
-                        {error  -> toast("Error ${error.localizedMessage}")}
-                )
+        disposable.add(productApiserve.getTransact(user!!)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                {result -> handleOrder(result)},
+                                {error  -> toast("Error ${error.localizedMessage}")}
+                    ))
     }
 
 
     fun deleteCart(code: String){
-        disposable = productApiserve.deleteCart(code,SharedPref.getmInstance(activity!!).customerUser!!)
+        disposable.add(productApiserve.deleteCart(code,SharedPref.getmInstance(activity!!).customerUser!!)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {result ->if(result.response!!){
-                                        getCart()
-                                 }else{
-                                        toast("Deleting was Failed")
+                            getCart()
+                        }else{
+                            toast("Deleting was Failed")
                         }},
                         {error  -> toast("Error ${error.localizedMessage}") }
-                )
+                ))
     }
 
 
     fun handleCart(cartList: List<Cart>) {
         if(cartList == null || cartList.isEmpty()){
               val mCartList: ArrayList<Cart> = ArrayList(cartList)
-              val adapter = CartAdapter(mCartList,this)
+              val adapter = CartAdapter(mCartList,this,activity.applicationContext)
               cartRecycler?.adapter   = adapter
               cartWarning?.visibility  = View.VISIBLE
               progressCart.visibility = View.GONE
         }else{
               val mCartList: ArrayList<Cart> = ArrayList(cartList)
-              val adapter = CartAdapter(mCartList,this)
+              val adapter = CartAdapter(mCartList,this,activity.applicationContext)
               cartRecycler?.adapter   = adapter
               cartWarning?.visibility = View.GONE
               progressCart.visibility = View.GONE
@@ -186,15 +195,16 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
         progressDialog!!.setCancelable(false)
         progressDialog!!.show()
         val user = SharedPref.getmInstance(activity!!).customerUser
-        disposable = productApiserve.updateAddress(user!!,address)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
+        disposable.add(productApiserve.updateAddress(user!!,address)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
                         {result -> bool = result.response
-                                   changeAdd(address)},
+                            changeAdd(address)},
                         {error  -> toast("Error ${error.localizedMessage}") }
-                )
+                        ))
     }
+
 
     fun changeAdd(add: String){
         if(bool!!){
@@ -213,7 +223,11 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
 
     override fun onPause() {
         super.onPause()
-        disposable?.dispose()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        disposable.clear()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -240,8 +254,31 @@ class CartFragment : Fragment(),CartAdapter.Delegate {
 
     override fun onStop() {
         super.onStop()
-        disposable?.dispose()
+        disposable.dispose()
     }
+
+
+    fun dialogEdit(){
+        val dialogView = LayoutInflater.from(activity).inflate(R.layout.dialog_address, null)
+
+        val builder = AlertDialog.Builder(activity)
+                .setView(dialogView)
+                .setPositiveButton("Proceed",null)
+                .setNegativeButton("Cancel",null)
+        val dialog = builder.show()
+
+        dialog.show()
+
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+
+        }
+    }
+
+
 
 
 }

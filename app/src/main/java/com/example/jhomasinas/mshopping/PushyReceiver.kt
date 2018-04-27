@@ -14,17 +14,16 @@ class PushyReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         val notificationTitle = "MShopping"
-        var notificationText = "Request Approved"
+        var notificationText = "Request Update"
 
         if (intent.getStringExtra("message") != null) {
             notificationText = intent.getStringExtra("message")
         }
 
         val builder = NotificationCompat.Builder(context)
-                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setSmallIcon(R.mipmap.ic_logo)
                 .setContentTitle(notificationTitle)
                 .setContentText(notificationText)
-                .setLights(Color.RED, 1000, 1000)
                 .setVibrate(longArrayOf(0, 400, 250, 400))
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setContentIntent(PendingIntent.getActivity(context, 60, Intent(context, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT))

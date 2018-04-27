@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginTop="18dp"
         android:fontFamily="@font/cantora_one"
-        android:text="Changing you Address will not affect you current process Order"
+        android:text="Changing the no. of Items "
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="18sp"
@@ -21,29 +21,25 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView10"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="7dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/cantora_one"
-        android:text="New Address"
+        android:text="New No. of Items"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp" />
 
     <EditText
         android:id="@+id/editAddress"
-        android:layout_width="350dp"
-        android:layout_height="65dp"
-        android:layout_below="@+id/textView11"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:ems="10"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/cantora_one"
-        android:hint="Enter your New Address"
-        android:inputType="textCapWords|textMultiLine"
+        android:hint="Enter Here"
+        android:inputType="number"
         android:maxLength="50"
         android:maxLines="2"
-        android:textAlignment="textStart"
         android:textSize="18sp" />
 
-</RelativeLayout>
+</LinearLayout>
