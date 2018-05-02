@@ -65,10 +65,10 @@ class ProductDetail : AppCompatActivity() {
         prodCategory.text  = intent.getStringExtra("Category")
         code               = intent.getStringExtra("Code")
         items1             = intent.getStringExtra("Items")
-        prodPrice2.text    = "$"+intent.getStringExtra("Price")+".00"
+        prodPrice2.text    = "$${intent.getStringExtra("Price")}.00"
         prodCode.text      = code
         prodimg            = intent.getStringExtra("Image")
-        prodItems.text     = items1+" Items Available"
+        prodItems.text     = "$items1 Items Available"
 
         loadImg()
 
@@ -88,7 +88,7 @@ class ProductDetail : AppCompatActivity() {
 
     fun loadImg(){
         Picasso.get()
-                .load("http://192.168.1.17/e-commerce/assets/image/"+prodimg)
+                .load("http://192.168.1.17/e-commerce/assets/image/$prodimg")
                 .resize(450, 450)
                 .centerCrop()
                 .into(viewProd)

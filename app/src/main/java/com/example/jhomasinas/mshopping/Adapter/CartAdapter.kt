@@ -39,11 +39,11 @@ class CartAdapter(val cartList: ArrayList<Cart>, val delegate: Delegate, val con
         val cart: Cart = cartList[position]
 
         holder?.prodName?.text  = cart.product_name
-        holder?.prodPrice?.text = "$"+cart.product_price+".00"
-        holder?.prodItems?.text = cart.product_items+" Items"
+        holder?.prodPrice?.text = "$${cart.product_price}.00"
+        holder?.prodItems?.text ="${cart.product_items} Items"
 
         Picasso.get()
-                .load("http://192.168.1.17/e-commerce/assets/image/"+cart.product_image)
+                .load("http://192.168.1.17/e-commerce/assets/image/${cart.product_image}")
                 .resize(350, 350)
                 .centerCrop()
                 .into(holder?.prodImg)

@@ -38,7 +38,7 @@ class ProductAdapter(val prodList: ArrayList<Product>, val delegate: Delegate) :
         holder?.prodName?.text = product.product_name
         holder?.prodPrice?.text = "$${product.product_price}.00"
         Picasso.get()
-                .load("http://192.168.1.17/e-commerce/assets/image/"+product.product_image)
+                .load("http://192.168.1.17/e-commerce/assets/image/${product.product_image}")
                 .resize(350, 350)
                 .centerCrop()
                 .into(holder?.prodImg)

@@ -28,7 +28,7 @@ class ProcessAdapter(val processlist: ArrayList<Approved>): RecyclerView.Adapter
         val approved: Approved = processlist[position]
 
         holder?.prodName?.text  = approved.product_name
-        holder?.txtAmount?.text = "$ "+approved.product_price+".00"
+        holder?.txtAmount?.text = "$ ${approved.product_price}.00"
 
 
             if(approved.product_payment == "Cash on Delivery"){
@@ -40,7 +40,7 @@ class ProcessAdapter(val processlist: ArrayList<Approved>): RecyclerView.Adapter
             }
 
         Picasso.get()
-                .load("http://192.168.1.17/e-commerce/assets/image/"+approved.product_image)
+                .load("http://192.168.1.17/e-commerce/assets/image/${approved.product_image}")
                 .resize(350, 350)
                 .centerCrop()
                 .into(holder?.prodImage)

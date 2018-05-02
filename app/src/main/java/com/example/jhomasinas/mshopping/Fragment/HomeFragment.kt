@@ -127,7 +127,7 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
             var imgView = dialogView.findViewById<ImageView>(R.id.imageDialog)
 
             Picasso.get()
-                    .load("http://192.168.1.17/e-commerce/assets/image/"+img)
+                    .load("http://192.168.1.17/e-commerce/assets/image/$img")
                     .resize(350, 350)
                     .centerCrop()
                     .into(imgView)
