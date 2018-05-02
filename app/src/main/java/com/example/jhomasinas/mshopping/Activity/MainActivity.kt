@@ -15,13 +15,17 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
+import com.example.jhomasinas.mshopping.Config.PicassoImageLoadingService
 import com.example.jhomasinas.mshopping.Config.SharedPref
 import com.example.jhomasinas.mshopping.Fragment.*
 import com.example.jhomasinas.mshopping.R
+import com.example.jhomasinas.mshopping.SettingsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import me.pushy.sdk.Pushy
 import org.jetbrains.anko.intentFor
 import q.rorbin.badgeview.QBadgeView
+import ss.com.bannerslider.ImageLoadingService
+import ss.com.bannerslider.Slider
 
 
 class MainActivity : AppCompatActivity() {
@@ -85,6 +89,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Pushy.listen(this);
+        Slider.init(PicassoImageLoadingService())
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         fragment = HomeFragment.newInstance()
         addFragment(fragment!!)

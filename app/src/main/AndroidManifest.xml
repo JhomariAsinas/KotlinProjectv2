@@ -75,14 +75,16 @@
         <service android:name="me.pushy.sdk.services.PushySocketService" />
 
         <receiver
-            android:name=".PushyReceiver" android:exported="false">
+            android:name=".PushyReceiver"
+            android:exported="false">
             <intent-filter>
+
                 <!-- Do not modify this -->
                 <action android:name="pushy.me" />
             </intent-filter>
         </receiver>
 
-
+        <activity android:name=".Activity.DeclinedActivity"></activity>
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.example.jhomasinas.mshopping.Activity.ProductDetail
 import com.example.jhomasinas.mshopping.Adapter.ProductAdapter
+import com.example.jhomasinas.mshopping.Adapter.SliderAdapter
 import com.example.jhomasinas.mshopping.Config.ProductApi
 import com.example.jhomasinas.mshopping.Config.ProductResponse
 import com.example.jhomasinas.mshopping.Config.SharedPref
@@ -23,11 +24,10 @@ import com.example.jhomasinas.mshopping.R
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.support.v4.indeterminateProgressDialog
 import org.jetbrains.anko.support.v4.toast
-
+import ss.com.bannerslider.Slider
 
 /**
  * A simple [Fragment] subclass.
@@ -69,7 +69,6 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root =  inflater.inflate(R.layout.fragment_home, container, false)
-
         swipe = root.findViewById(R.id.mSwipeRefreshLayout)
         recyclerView1  = root.findViewById(R.id.recyclerView)as RecyclerView
 
@@ -77,10 +76,13 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
         progressDialog!!.setCancelable(false)
         progressDialog!!.show()
 
+
         initRecyclerView()
 
-        getProduct()
+        val slider = root.findViewById<Slider>(R.id.bannerSlider)
+        slider.setAdapter(SliderAdapter())
 
+        getProduct()
         swipe?.setOnRefreshListener {
             getProduct()
             swipe?.isRefreshing = false
@@ -90,6 +92,7 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
     }
 
     fun initRecyclerView(){
+        recyclerView1!!.isNestedScrollingEnabled = true
         recyclerView1!!.setHasFixedSize(true)
         recyclerView1!!.layoutManager = GridLayoutManager(activity,2)
     }
@@ -155,7 +158,6 @@ class HomeFragment : Fragment(),ProductAdapter.Delegate {
             SharedPref.getmInstance(activity).getItems(response.items!!.toString())
         }
     }
-
 
 
 }// Required empty public constructor

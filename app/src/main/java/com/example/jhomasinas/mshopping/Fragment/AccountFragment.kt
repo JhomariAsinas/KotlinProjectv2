@@ -10,9 +10,11 @@ import android.widget.Button
 import android.widget.TextView
 import com.example.jhomasinas.mshopping.Activity.LoginActivity
 import com.example.jhomasinas.mshopping.Activity.MainActivity
+import com.example.jhomasinas.mshopping.Activity.SettingsActivity
 import com.example.jhomasinas.mshopping.Activity.SignUpActivity
 import com.example.jhomasinas.mshopping.Config.SharedPref
 import com.example.jhomasinas.mshopping.R
+import com.example.jhomasinas.mshopping.SettingsFragment
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.intentFor
@@ -43,7 +45,7 @@ class AccountFragment : Fragment() {
         txtName     = root.findViewById(R.id.textView15)
         btnSign?.setOnClickListener { startActivity(intentFor<SignUpActivity>()) }
         btnLog?.setOnClickListener  { startActivity(intentFor<LoginActivity>())  }
-
+        settings()
         btnAccount?.setOnClickListener {
             alert("Are you sure you want to logout?") {
                 title = "LOGOUT"
@@ -76,5 +78,12 @@ class AccountFragment : Fragment() {
 
     }
 
+    fun settings(){
+        activity.fragmentManager.beginTransaction()
+                .replace(R.id.settingsLayout,SettingsFragment())
+                .commit()
+    }
+
 }
+
 

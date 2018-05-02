@@ -2,14 +2,40 @@
     android:id="@+id/mSwipeRefreshLayout"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     tools:context="com.example.jhomasinas.mshopping.Fragment.HomeFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ss.com.bannerslider.Slider
+                android:id="@+id/bannerSlider"
+                android:layout_height="250dp"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="5dp"
+                app:slider_interval="5000"
+                android:padding="3dip"
+                app:slider_loopSlides="true"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
 
 </android.support.v4.widget.SwipeRefreshLayout>

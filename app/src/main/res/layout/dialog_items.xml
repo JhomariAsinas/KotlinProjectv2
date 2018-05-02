@@ -17,15 +17,14 @@
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="13dp"
-            android:layout_toStartOf="@+id/editTextItems"
-            android:src="@drawable/ic_info_black_24dp" />
+            android:layout_marginLeft="35dp"/>
 
         <TextView
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/imageView3"
-            android:layout_toEndOf="@+id/imageView3"
             android:fontFamily="@font/cantora_one"
+            android:layout_centerHorizontal="true"
             android:maxLines="3"
             android:layout_margin="5dp"
             android:text="You must enter the no. of items you want to add into your account"

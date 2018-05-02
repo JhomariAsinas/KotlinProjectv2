@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <Preference android:title="Activate Solo Code"
-        android:icon="@drawable/ic_style_black_24dp">
-    </Preference>
-    <Preference
-        android:title="Update Your Profile"
-        android:icon="@drawable/ic_account_circle_black_24dp">
-    </Preference>
-    <Preference
-        android:title="About"
-        android:icon="@drawable/ic_info_black_24dp">
-    </Preference>
+    <PreferenceCategory
+        android:title="Settings"
+        android:singleLineTitle="true">
+
+        <Preference
+            android:title="Declined Orders"
+            android:icon="@drawable/ic_remove_shopping_cart_black_24dp">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="com.example.jhomasinas.mshopping"
+                android:targetClass="com.example.jhomasinas.mshopping.Activity.DeclinedActivity"/>
+
+        </Preference> >
+
+        <Preference
+            android:title="Activate Solo Code"
+            android:icon="@drawable/ic_style_black_24dp"/>
+
+        <Preference
+            android:title="Update Your Profile"
+            android:icon="@drawable/ic_account_circle_black_24dp"/>
+
+
+        <Preference
+            android:title="About"
+            android:icon="@drawable/ic_info_black_24dp"/>
+
+    </PreferenceCategory>
+
+
 </PreferenceScreen>

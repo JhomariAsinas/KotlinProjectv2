@@ -3,12 +3,10 @@
 package com.example.jhomasinas.mshopping.Activity
 
 import android.app.Activity
-import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.view.MenuItemCompat
-import android.support.v4.view.MenuItemCompat.getActionView
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.util.Log
@@ -140,7 +138,7 @@ class ProductDetail : AppCompatActivity() {
                         toast("Insufficient Items for your Order")
                     }else{
                         addtoCart(items2.toString())
-                        dialog.dismiss()
+                         dialog.dismiss()
                     }
                 }
         }
